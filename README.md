@@ -8,3 +8,7 @@ If in response you will receive something like *www-data* then you are able to p
 # urlEncode.py
 Simple script to encode urls. You can run it like this: <br />
 *python ./urlEncode.py "url to encode"*
+
+# dependenciesRecon.js
+Simple script that automates basic dependecies recon on websites in browser. It is designed to be used in chrome/opera console.
+To use it just copy paste it to the browser's console on website you want to check.
