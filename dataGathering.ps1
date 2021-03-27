@@ -10,20 +10,20 @@ ForEach($entry in $tempRawData)
     Get-ChildItem $tempName
 }
 
-#Checking Sddl of file
+#SDDL
 Get-Acl .\example.txt | Format-List
+ConvertFrom-SddlString -Sddl
 
 #Systeminfo
 Systeminfo
+Get-ComputerInfo
 
 #Net name cache
 Nbtstat -c
 
-#Active connections
-Netstat -ano
-
-#Route table
-Netstat -rn
+#Network statistics
+Netstat
+Get-NetTCPConnection
 
 #Configuration of network devices
 Ipconfig -all
@@ -33,20 +33,30 @@ Tasklist /svc
 Get-Process
 
 #Running services
-Get-Service | Format-List
+sc.exe query
+Get-Service
 
 #Scheduled tasks
 Schtasks /query
+Get-ScheduledTask
+Get-ScheduledTask -TaskName TaskName | Get-ScheduledTaskInfo
 
-#Network shares
+#Shared resources
 Net Share
+Get-SmbShare
+
+#Prefetch files
+Get-ChildItem C:\Windows\Prefetch
+
+#Event log
+Get-EventLog
+
+#Windows events
+Get-WinEvent
 
 #Get active sessions
 Get-CimInstance Win32_LoggedOnUser
 Get-Process -IncludeUserName | Select-Object UserName,SessionId | Sort-Object SessionId -Unique
-
-#Retrieves basic information about the files that are open on behalf of the clients of the SMB server
-Get-SmbOpenFile
 
 #Last ran apps in Win+R
 Get-ItemProperty -path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU"
